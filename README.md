@@ -6,6 +6,7 @@
 
 - run `npx ts-node ./create_account.ts` to run ./create_account.ts
 - run `npx ts-node ./wallet_to_bs58.ts` to run ./create_account.ts
+- Add `.gitignore` and put the word `node_modules` for git to ignore the node_modules directory
 
 ```
 javascript
