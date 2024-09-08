@@ -1,5 +1,7 @@
 # UPD_renzocabarios
 
+
+- `npm i -g pnpm` to install pnpm
 - run `npm init --y` to create a new node project
 - run `npm i -D ts-node typescript` to add typescript
 - run `npm i @solana/web3.js bs58` to add solana blockchain dependencies to the node project
