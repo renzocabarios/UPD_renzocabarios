@@ -73,7 +73,10 @@ import bs58 from "bs58";
     ),
   ];
 
-  const txHash = await CONNECTION.sendTransaction(tx, [MY_KEYPAIR]);
+  const txHash = await CONNECTION.sendTransaction(tx, [
+    MY_KEYPAIR,
+    MINT_KEYPAIR,
+  ]);
   console.log(txHash);
   //   Steps
   // 1. Mint Account
