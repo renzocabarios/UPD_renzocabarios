@@ -16,21 +16,44 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import useMounted from "@/hooks/useMounted";
+import useDeposit from "@/hooks/useDeposit";
+import useWithdraw from "@/hooks/useWithdraw";
 export default function Home() {
+  const mounted = useMounted();
+
+  const { mutate: deposit, isPending: depositIsPending } = useDeposit();
+  const { mutate: withdraw, isPending: withdrawIsPending } = useWithdraw();
+
   const form = useForm<IVaultSchema>({
     resolver: zodResolver(VaultSchema),
     defaultValues: VaultSchemaDefaults,
   });
 
   function onDeposit(values: IVaultSchema) {
-    console.log(values);
+    deposit({ ...values });
   }
 
   function onWithdraw(values: IVaultSchema) {
-    console.log(values);
+    withdraw({ ...values });
+  }
+
+  if (!mounted) {
+    return <></>;
+  }
+
+  if (depositIsPending || withdrawIsPending) {
+    return (
+      <>
+        <p>It is loading</p>
+      </>
+    );
   }
   return (
     <div className="">
+      <WalletMultiButton />
+
       <div className="">
         <p>Wallet Address: 2VqX4q2pTN883jrNw8EdpjjcnK7gPGWgLGCbpWASjAhU</p>
         <p>1 SOL</p>
