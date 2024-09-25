@@ -20,12 +20,18 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import useMounted from "@/hooks/useMounted";
 import useDeposit from "@/hooks/useDeposit";
 import useWithdraw from "@/hooks/useWithdraw";
+import useGetVaults from "@/hooks/useGetVaults";
+import { useEffect } from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import useGetBalance from "@/hooks/useGetBalance";
 export default function Home() {
   const mounted = useMounted();
 
+  const { publicKey } = useWallet();
+
   const { mutate: deposit, isPending: depositIsPending } = useDeposit();
   const { mutate: withdraw, isPending: withdrawIsPending } = useWithdraw();
-
+  const { data } = useGetBalance();
   const form = useForm<IVaultSchema>({
     resolver: zodResolver(VaultSchema),
     defaultValues: VaultSchemaDefaults,
@@ -55,8 +61,8 @@ export default function Home() {
       <WalletMultiButton />
 
       <div className="">
-        <p>Wallet Address: 2VqX4q2pTN883jrNw8EdpjjcnK7gPGWgLGCbpWASjAhU</p>
-        <p>1 SOL</p>
+        <p>Wallet Address: {publicKey?.toString() ?? ""}</p>
+        <p>{data} SOL</p>
 
         <Form {...form}>
           <FormField
@@ -76,10 +82,6 @@ export default function Home() {
           <Button onClick={form.handleSubmit(onDeposit)}>Deposit</Button>
           <Button onClick={form.handleSubmit(onWithdraw)}>Withdraw</Button>
         </Form>
-      </div>
-      <div className="border border-gray-400 rounded-xl p-4">
-        <p>Wallet Address: 2VqX4q2pTN883jrNw8EdpjjcnK7gPGWgLGCbpWASjAhU</p>
-        <p>1 SOL</p>
       </div>
     </div>
   );

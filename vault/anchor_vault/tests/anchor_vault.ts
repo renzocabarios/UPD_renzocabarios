@@ -21,6 +21,7 @@ describe("anchor_vault", () => {
       .withdraw(new BN(1_000_000))
       .accounts({ signer: provider.publicKey! })
       .rpc();
+
     console.log("Your transaction signature", tx);
   });
 });
