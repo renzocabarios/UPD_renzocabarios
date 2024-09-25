@@ -7,11 +7,15 @@ skip-lint = false
 [programs.localnet]
 anchor_vault = "39q87wUrAWA1LKiUtD7eiZdKJ6DhuoB5jVAznpuEqy1t"
 
+
+[programs.devnet]
+anchor_vault = "39q87wUrAWA1LKiUtD7eiZdKJ6DhuoB5jVAznpuEqy1t"
+
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "Devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
